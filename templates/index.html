@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistem Rekomendasi Film</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        select, button {
+            padding: 8px 12px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        ul {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Rekomendasi Film</h1>
+
+    <form method="POST">
+        <label for="genre">Pilih Genre Film:</label><br>
+        <select name="genre" required>
+            <option value="">-- Pilih Genre --</option>
+            {% for genre in genres %}
+                <option value="{{ genre }}" {% if genre == selected %}selected{% endif %}>{{ genre }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit">Cari Rekomendasi</button>
+    </form>
+
+    {% if recommendations %}
+        <h2>Hasil Rekomendasi:</h2>
+        <ul>
+            {% for movie in recommendations %}
+                <li><strong>{{ movie[0] }}</strong> - {{ movie[1] }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
